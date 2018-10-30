@@ -35,7 +35,5 @@ public class kaitplant18_script : MonoBehaviour {
                 i++;
             }
         }
-        else;
-
     }
 }

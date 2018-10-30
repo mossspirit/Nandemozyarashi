@@ -192,11 +192,11 @@ public class SteamVR_PlayArea : MonoBehaviour
 			{
 				foreach (var f in fields)
 				{
-					if (!values.Contains(f) || !f.GetValue(this).Equals(values[f]))
+					/*if (!values.Contains(f) || !f.GetValue(this).Equals(values[f]))
 					{
 						rebuild = true;
 						break;
-					}
+					}*/
 				}
 			}
 
