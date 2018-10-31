@@ -12,14 +12,16 @@ public class Rotation_kaiten : MonoBehaviour {
     /// </summary>
 
     private float x, z, neko_x, neko_z, direction_vector_x, direction_vector_z;
+    [SerializeField,Tooltip("回転対象物")]
     private GameObject nekojarashi;
     private Vector3 pengin_rotate,neko_posi;
     [SerializeField,Tooltip("回転の速さを決める係数。speed * 0.01(秒)")]
     private int speed = 100;
+    [System.NonSerialized]
+    public bool flag = true;
 
 	void Start () 
     {
-        nekojarashi = GameObject.Find("nekojarashi1");
         neko_posi = nekojarashi.transform.position; //ねこじゃらしの位置
 	}
 	
@@ -31,11 +33,13 @@ public class Rotation_kaiten : MonoBehaviour {
         neko_z = neko_posi.z;     //猫じゃらしのz
         direction_vector_x = x - neko_x; // 正の数…第２、３象限　負の数…第１、４象限
         direction_vector_z = z - neko_z; // 正の数…第３、４象限　負の数…第１、２象限
+        if(flag)
         Rotation(direction_vector_x, direction_vector_z);
 	}
 
     private IEnumerator Rotation(float dx, float dz)
     {
+        
         float yziku = gameObject.transform.localEulerAngles.y; //?
         float rad = Mathf.Atan2(dx, dz);
         float angle = rad * 180 / Mathf.PI;
@@ -48,5 +52,6 @@ public class Rotation_kaiten : MonoBehaviour {
             transform.eulerAngles = pengin_rotate;
             yield return new WaitForSeconds(0.01f);
         }
+        flag = false;
     }
 }

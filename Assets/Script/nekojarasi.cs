@@ -8,39 +8,64 @@ public class nekojarasi : MonoBehaviour {
     /// 猫じゃらしの対象物がこっちに向かってくる（Hanteiメソッドで定義、実装）    
     /// </summary>   
     /// 
-    private float a = 0,b = 0,c = 0; 
+    private float new_data = 0,old_data = 0,c = 0;
+    private int i;
+    private bool rotation_flag; 
     [SerializeField]
     private float sa_hensu = 100f;   
     [SerializeField,TooltipAttribute("対象のスクリプトを消すか消さないかのためのオブジェクト変数")]
-    private GameObject pengin;
-    private bool penguin_flag = false;   
+    private GameObject[] objects;
+    private bool[] Moving_idou_flag,Rotation_kaiten_flag;
+    private Moving_idou[] moving_Idou;
+    private Rotation_kaiten[] rotation_Kaiten;
     [System.NonSerialized]
     public bool nekojarashi_flag = false;  
     [System.NonSerialized]  
     public int flag;
-    private Moving_idou moving_Idou;   
+
     void Start () {     
-        a = transform.eulerAngles.y;    
-        moving_Idou = pengin.GetComponent<Moving_idou>();      
-        penguin_flag = moving_Idou.enabled;       
-        penguin_flag = false;    
+        new_data = transform.eulerAngles.y;  
+        for(i = 0;i <= objects.Length;i++)
+        {
+            moving_Idou[i] = objects[i].GetComponent<Moving_idou>();     
+            Moving_idou_flag[i] = moving_Idou[i].enabled;       
+            Moving_idou_flag[i] = false;
+
+            rotation_Kaiten[i] = objects[i].GetComponent<Rotation_kaiten>();
+            Rotation_kaiten_flag[i] = rotation_Kaiten[i].enabled;
+            Rotation_kaiten_flag[i] = false;
+        }     
     }    
     void FixedUpdate () {        
-        c++;       
-        if (c % 7 == 0) {            
-            b = transform.eulerAngles.y;           
-            flag++;           
-            if (Hantei(a, b) && flag >= 10) {                
-                penguin_flag = true;               
-                nekojarashi_flag = true;            
+        c++; 
+        if(c >= 120) c = 0;      
+        else if (c % 7 == 0) {            
+            old_data = transform.eulerAngles.y;           
+            flag++;
+            rotation_flag = rotation_Kaiten[0].flag;   
+            if (Hantei(new_data, old_data) && flag >= 10) {
+                if(rotation_flag){
+                    for(i = 0;i<=Rotation_kaiten_flag.Length;i++){
+                    Rotation_kaiten_flag[i] = true;
+                    }
+                }
+                else
+                    for(i = 0;i<=Moving_idou_flag.Length;i++){
+                    Moving_idou_flag[i] = true;
+                }       
+                nekojarashi_flag = true;        
             }          
             else {  
-                penguin_flag = false;               
+                for(i = 0;i<=Moving_idou_flag.Length;i++){
+                    Rotation_kaiten_flag[i] = false;
+                    Moving_idou_flag[i] = false;
+                }                     
                 nekojarashi_flag = false;            
             }      
-            a = b;       
+            new_data = old_data;       
         }
-    }    
+    }  
+
     public bool Hantei(float new_data,float old_data){
         float result;
         float abs_new_data, abs_old_data;       

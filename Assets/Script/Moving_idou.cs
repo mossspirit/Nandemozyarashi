@@ -7,7 +7,8 @@ public class Moving_idou: MonoBehaviour {
     /// 基本的にidou_flagで制御     
     /// idou_flagをずっとtrueにしてると二次関数的な移動を行う    
     /// 10/24現在のセッティングのままでは回転が終わったら移動となっている    
-    /// </summary> 
+    /// </summary>
+    [SerializeField] 
     private GameObject nekojarasi;   
     private Vector3 neko_posi,nlz,posi,pengin_rotate,start_vector;    
     private float x, z, neko_x, neko_z,direction_vector_x,direction_vector_z;   
@@ -16,10 +17,8 @@ public class Moving_idou: MonoBehaviour {
     private bool flag = true, isgrand = true,idouflag = false;    
     private IEnumerator Enumerable;    private int a = 1;   
     
-    void Awake()   {       
-        nekojarasi = GameObject.Find("nekojarashi1");       
-        neko_posi = nekojarasi.transform.position; //ねこじゃらしの位置       
-        //b = GameObject.Find("nekojarashi1_set").GetComponent<nekojarasi>().flag; //ねこじゃらしが沢山ふられたかどうか   
+    void Awake()   {              
+        neko_posi = nekojarasi.transform.position; //ねこじゃらしの位置
         }   
         
     void Update()    {       
@@ -36,41 +35,13 @@ public class Moving_idou: MonoBehaviour {
         nlz = posi.normalized;       
         transform.Translate(nlz * speed);        
         posi.Set(0, 0, 1);       //移動する方向を向く(回転する)      
-        if(flag)       {         
-            Enumerable = Rotation(direction_vector_x, direction_vector_z);           
-            StartCoroutine(Enumerable);          
-            flag = false;   
-        }      
         if(idouflag)       {         
             nlz = posi.normalized;           
             transform.Translate(nlz * speed);            
-            if ((direction_vector_x <= 0.1f) && (direction_vector_x >= -0.1f) && (direction_vector_z <= 0.1f) && (direction_vector_z >= -0.1f))           {               
+            if ((direction_vector_x <= 0.1f) && (direction_vector_x >= -0.1f) && (direction_vector_z <= 0.1f) && (direction_vector_z >= -0.1f)){               
                 Debug.Log("a");               
                 idouflag = false;           
             }      
         }   
     }  
-    //回転    
-    //段階に分けて回転させたかったのでコルーチンで制御   
-    private IEnumerator Rotation(float dx,float dz) {        
-        dx *= -1;       
-        dz *= -1;        
-        Debug.Log("a");        
-        float yziku = gameObject.transform.localEulerAngles.y * -1;        
-        float rad = Mathf.Atan2(dx, dz);        
-        float angle = rad * 180 / Mathf.PI;       
-        float angle_percentage = angle / 100;       
-        Debug.Log(angle);
-        while(!(gameObject.transform.localEulerAngles.y >= angle)) //        
-        {          
-            yziku += angle_percentage;            
-            pengin_rotate.Set(0f, yziku, 0f);           
-            transform.eulerAngles = pengin_rotate;            
-            yield return new WaitForSeconds(0.01f);        
-        }        
-        idouflag = true;    
-    } 
-    void Kaiten() {   
-
-        }
-    }
+}
