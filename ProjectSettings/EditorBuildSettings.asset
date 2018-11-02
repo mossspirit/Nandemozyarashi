@@ -5,7 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/clock.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/start.unity
+    guid: 7cb4a8ab0ec262c4a99fb5b0aef449a5
+  - enabled: 1
+    path: Assets/Scenes/chair.unity
+    guid: 2f7c1b8a9af231c4eb674de469455bcd
+  - enabled: 1
+    path: Assets/Scenes/danbo.unity
+    guid: 023be33b7f6805841a0cf827db29fff9
+  - enabled: 1
+    path: Assets/Scenes/plant.unity
+    guid: 28137c7a4f0e0d84d987ea23d00adadd
+  - enabled: 1
+    path: Assets/Scenes/soccerball.unity
+    guid: a3f4b8dd902423641a80879603c17acc
   m_configObjects: {}

@@ -15,17 +15,15 @@ public class Rotation_kaiten : MonoBehaviour {
     [SerializeField,Tooltip("回転対象物")]
     private GameObject nekojarashi;
     private Vector3 pengin_rotate,neko_posi;
-    [SerializeField,Tooltip("回転の速さを決める係数。speed * 0.01(秒)")]
+    [SerializeField, Tooltip("回転の速さを決める係数。speed * 0.01(秒)")]
     private int speed = 100;
+        private int i = 0;
     [System.NonSerialized]
-    public bool flag = true;
+    public bool flag = false;
+    [SerializeField]
+    private GameObject ko;
 
-	void Start () 
-    {
-        neko_posi = nekojarashi.transform.position; //ねこじゃらしの位置
-	}
-	
-	void Update () 
+    void Update()
     {
         x = transform.position.x; //無機物のx
         z = transform.position.z; //無機物のz
@@ -33,25 +31,33 @@ public class Rotation_kaiten : MonoBehaviour {
         neko_z = neko_posi.z;     //猫じゃらしのz
         direction_vector_x = x - neko_x; // 正の数…第２、３象限　負の数…第１、４象限
         direction_vector_z = z - neko_z; // 正の数…第３、４象限　負の数…第１、２象限
-        if(flag)
-        Rotation(direction_vector_x, direction_vector_z);
-	}
+        if (flag)
+        {
+            StartCoroutine(Rotation(direction_vector_x,direction_vector_z));
+            flag = false;
+        }
+    }
 
     private IEnumerator Rotation(float dx, float dz)
     {
-        
         float yziku = gameObject.transform.localEulerAngles.y; //?
         float rad = Mathf.Atan2(dx, dz);
         float angle = rad * 180 / Mathf.PI;
         float angle_percentage = angle / (float)speed;
         Debug.Log(angle);
-        while (!(gameObject.transform.localEulerAngles.y >= angle)) //
+        while (true) //
         {
             yziku += angle_percentage;
             pengin_rotate.Set(0f, yziku, 0f);
             transform.eulerAngles = pengin_rotate;
             yield return new WaitForSeconds(0.01f);
+            i++;
+            if(i >= 100)
+            {
+                flag = false;
+                break;
+            }
         }
-        flag = false;
+        ko.GetComponent<Moving_idou>().flag = true;
     }
 }
