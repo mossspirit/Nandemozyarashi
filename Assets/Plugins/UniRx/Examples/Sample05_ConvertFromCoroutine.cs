@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Threading;
@@ -43,3 +44,44 @@ namespace UniRx.Examples
 #if UNITY_2018_3_OR_NEWER
 #pragma warning restore CS0618
 #endif
+=======
+﻿using System;
+using System.Collections;
+using System.Threading;
+using UnityEngine;
+
+namespace UniRx.Examples
+{
+    public class Sample05_ConvertFromCoroutine
+    {
+        // public method
+        public static IObservable<string> GetWWW(string url)
+        {
+            // convert coroutine to IObservable
+            return Observable.FromCoroutine<string>((observer, cancellationToken) => GetWWWCore(url, observer, cancellationToken));
+        }
+
+        // IEnumerator with callback
+        static IEnumerator GetWWWCore(string url, IObserver<string> observer, CancellationToken cancellationToken)
+        {
+            var www = new UnityEngine.WWW(url);
+            while (!www.isDone && !cancellationToken.IsCancellationRequested)
+            {
+                yield return null;
+            }
+
+            if (cancellationToken.IsCancellationRequested) yield break;
+
+            if (www.error != null)
+            {
+                observer.OnError(new Exception(www.error));
+            }
+            else
+            {
+                observer.OnNext(www.text);
+                observer.OnCompleted();
+            }
+        }
+    }
+}
+>>>>>>> c82f9d2c57929125d03fd2866298ec0a17415fc4

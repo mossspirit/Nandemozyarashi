@@ -20,12 +20,14 @@ public class idou : MonoBehaviour {
     private Vector3 neko_posi;
     private Animator animator;
     private string[] anim_name = { "walk", "zyare1", "zyare2", "jump1" };
+    SerialMain serial;
 
     void Start ()
     {
         nekojarashi = obj.GetComponent<nekojarasi>();
         neko_posi = camera_pos.transform.position;
         animator = GetComponent<Animator>();
+        serial = GameObject.Find("SerialMain").GetComponent<SerialMain>();
 	}
 
 
@@ -81,6 +83,9 @@ public class idou : MonoBehaviour {
                     var i = Random.Range(1, 4);
                     animator.SetTrigger(anim_name[i]);
                     time = 0;
+                    byte[] data = new byte[1];
+                    data[0] = 0x61; //aを送信
+                    serial.Write(data);
                 }
             }
         }
