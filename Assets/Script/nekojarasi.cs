@@ -31,25 +31,23 @@ public class nekojarasi : MonoBehaviour
     {
         animation_flag = doubutsu.GetComponent<idou>().a_flag;
         c++;
-        if (c >= 2)
+        if (c > 4)
         {
             c = 0;
             flag = 0;
         }
-        else if (c % 1 == 0)
+        else if (c % 2 == 0)
         {
             old_data = transform.eulerAngles.y;
             flag++;
 
-            if (Hantei(new_data, old_data) && flag >= 1)
+            if (Hantei(new_data, old_data) && flag >= 1 || Input.GetKey(KeyCode.Z))
             {
-                Debug.Log("a");
                 idou_flag = true;
 
             }
             else
             {
-                Debug.Log("b");
                 idou_flag = false;
             }
         }
