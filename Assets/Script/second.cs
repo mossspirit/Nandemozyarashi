@@ -1,18 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class second : MonoBehaviour {
     
     GameObject hour, minute;            //短針、長針
-    float a = -1f;                    //角速度
+    [SerializeField]
+    float a;                    //角速度
     int i = 1;                          //時間
+    bool flag = true;
+    string[] scene_name = {"chair","plant","end"};
 
 	void Start () {
+        a *= -1;
         hour = GameObject.Find("hour");
         minute = GameObject.Find("minute");
         StartCoroutine(MagicTime());    //最初だけ実行
 	}
+
+    void Update()
+    {
+        if(i >= 60 && flag)
+        { 
+            flag = false; 
+            if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)
+            {
+                GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag++;
+                if(SceneManager.GetActiveScene().name == scene_name[0])
+                    SceneManager.LoadScene(scene_name[1]);
+                else if(SceneManager.GetActiveScene().name == scene_name[1])
+                    SceneManager.LoadScene(scene_name[0]);
+            }
+            else if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag == 1)
+            {
+                SceneManager.LoadScene(scene_name[2]);
+            }
+            {
+                
+            }
+        }
+    }
 
     IEnumerator MagicTime() //短針、長針を管理するコルーチン
     {

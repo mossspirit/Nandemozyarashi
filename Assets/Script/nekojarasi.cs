@@ -1,55 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-public class nekojarasi : MonoBehaviour {
-
-    /// <summary>
-    /// ねこじゃらしの移動量をフレーム単位で算出してオブジェクトの移動を促す
-    /// 前フレームと今フレームを絶対値で減算し、その値が一定数（sa_hensu）以上であれば
-    /// 猫じゃらしの対象物がこっちに向かってくる（Hanteiメソッドで定義、実装）
-    /// </summary>
+public class nekojarasi : MonoBehaviour
+{
+    /// <summary>    
+    /// ねこじゃらしの移動量をフレーム単位で算出してオブジェクトの移動を促す    
+    /// 前フレームと今フレームを絶対値で減算し、その値が一定数（sa_hensu）以上であれば    
+    /// 猫じゃらしの対象物がこっちに向かってくる（Hanteiメソッドで定義、実装）    
+    /// </summary>   
     /// 
-    private float a = 0,b = 0,c = 0;
+    private float new_data = 0, old_data = 0, c = 0;
+    private int i;
+    private bool rotation_flag,animation_flag;
     [SerializeField]
     private float sa_hensu = 100f;
-    [SerializeField]
-    private GameObject pengin;
-    private bool penguin_flag = false;
 
     [System.NonSerialized]
     public bool nekojarashi_flag = false;
     [System.NonSerialized]
-    public int flag;
+    public bool idou_flag = false;
+    private int flag;
+    [SerializeField]
+    private GameObject doubutsu;
 
-    void Start () {
-        a = transform.eulerAngles.y;
+     void Start()
+    {
 
-        pengin.GetComponent<penguin>().enabled = false;
     }
-
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
+        animation_flag = doubutsu.GetComponent<idou>().a_flag;
         c++;
-        if (c % 7 == 0)
+        if (c > 4)
         {
-            b = transform.eulerAngles.y;
-            Debug.Log(Hantei(a, b));
+            c = 0;
+            flag = 0;
+        }
+        else if (c % 2 == 0)
+        {
+            old_data = transform.eulerAngles.y;
             flag++;
-            if (Hantei(a, b) && flag >= 10)
+
+            if (Hantei(new_data, old_data) && flag >= 1 || Input.GetKey(KeyCode.Z))
             {
-                pengin.GetComponent<penguin>().enabled = true;
-                nekojarashi_flag = true;
+                idou_flag = true;
+
             }
             else
             {
-                pengin.GetComponent<penguin>().enabled = false;
-                nekojarashi_flag = false;
+                idou_flag = false;
             }
-            a = b;
         }
-	}
+        new_data = old_data;
+    }
 
-    public bool Hantei(float new_data,float old_data) 
+
+    public bool Hantei(float new_data, float old_data)
     {
         float result;
         float abs_new_data, abs_old_data;
@@ -62,7 +68,7 @@ public class nekojarasi : MonoBehaviour {
             result = abs_new_data + abs_old_data;
             result *= 100;
             result = System.Math.Abs(result);
-            //Debug.Log(result);
+            //Debug.Log(result);    
             if (result > sa_hensu) return true;
             else return false;
         }
@@ -74,9 +80,10 @@ public class nekojarasi : MonoBehaviour {
             result *= 100;
             result = System.Math.Abs(result);
             //Debug.Log(result);
+
             if (result > sa_hensu) return true;
             else return false;
         }
-        else return false; //値が同じ　＝　動かしていない
+        else return false; //値が同じ　＝　動かしていない  
     }
 }
