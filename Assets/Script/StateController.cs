@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StateController : StateMachineBehaviour
 {
-    AudioController _audio;
+    SE_controller _audio;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _audio = GameObject.Find("Iris/IrisAudio").GetComponent<AudioController>();
+        _audio = GameObject.Find("Iris/IrisAudio").GetComponent<SE_controller>();
         
         if (stateInfo.IsName("Aegi"))
         {
