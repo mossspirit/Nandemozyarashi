@@ -92,4 +92,5 @@ public class idou : MonoBehaviour {
         }
         yield return new WaitForSeconds(0.5f);
     }
+
 }

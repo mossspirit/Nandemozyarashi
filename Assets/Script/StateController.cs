@@ -38,7 +38,7 @@ public class StateController : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (stateInfo.IsName("zyare1") || stateInfo.IsName("zyare2") || stateInfo.IsName("zyare3"))
+        if (stateInfo.IsName("zyare1") || stateInfo.IsName("zyare2") || stateInfo.IsName("zyare3") || stateInfo.IsName("jump"))
         {
             SE_flag = true;
         }
