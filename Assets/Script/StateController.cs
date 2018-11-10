@@ -4,58 +4,43 @@ using UnityEngine;
 public class StateController : StateMachineBehaviour
 {
     SE_controller _audio;
+    [System.NonSerialized]
+    public bool SE_flag = false;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _audio = GameObject.Find("Iris/IrisAudio").GetComponent<SE_controller>();
-        
-        if (stateInfo.IsName("Aegi"))
+        _audio = GameObject.Find("[CameraRig]").GetComponent<SE_controller>();
+        SE_flag = false;
+
+        if (stateInfo.IsName("wait"))
         {
-            int i = Random.Range(0, 2);
-            if (i == 0) _audio.Audio1();
-            if (i == 1) _audio.Audio1_3();
+            Debug.Log("b");
+            _audio.Wait_SE();
         }
-        if (stateInfo.IsName("Aegi2"))
+        if (stateInfo.IsName("walk"))
         {
-            _audio.Audio2();
+            Debug.Log("a");
+
+            _audio.Walk_SE();
         }
-        if (stateInfo.IsName("Aegi3"))
+        if (stateInfo.IsName("zyare1"))
         {
-            _audio.Audio3();
+            _audio.Zyare1_SE();
         }
-        if(stateInfo.IsName("Aegi4"))
+        if(stateInfo.IsName("zyare2"))
         {
-            _audio.Audio1_2();
+            _audio.Zyare2_SE();
         }
-        if (stateInfo.IsName("Kiss1_1"))
+        if (stateInfo.IsName("zyare3") || stateInfo.IsName("jump"))
         {
-            _audio.KissAudio1_1();
-        }
-        if (stateInfo.IsName("Kiss1_2"))
-        {
-            _audio.KissAudio1_2();
+            _audio.Zyare3_SE();
         }
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (stateInfo.IsName("Aegi"))
+        if (stateInfo.IsName("zyare1") || stateInfo.IsName("zyare2") || stateInfo.IsName("zyare3"))
         {
-            animator.SetBool("State1", false);
-        }
-        if (stateInfo.IsName("Aegi2"))
-        {
-            animator.SetBool("State2", false);
-        }
-        if (stateInfo.IsName("Aegi3"))
-        {
-            animator.SetBool("State3", false);
-        }
-        if (stateInfo.IsName("Aegi4"))
-        {
-            animator.SetBool("State4", false);
-        }
-        if (stateInfo.IsName("Kiss1_2"))
-        {
-            animator.SetBool("kiss1_2", false);
+            SE_flag = true;
         }
 
     }
