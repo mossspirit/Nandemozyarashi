@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/_last_export/bookanime3V4.fbx.meta
 guid: 5ce287994cae4440e8dfe853d9473d79
 ModelImporter:
   serializedVersion: 22
@@ -38,6 +39,57 @@ ModelImporter:
     9500000: //RootNode
     10800000: Lamp
     13700000: Group_006
+=======
+guid: 5bd196407a58542439294c1edb621984
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: group16_pasted__group8_pasted__pasted__pCube81_group22
+    100002: group22_pasted__pCube79
+    100004: group22_pCube80
+    100006: //RootNode
+    100008: pasted__pCylinder17_group19
+    100010: pasted__pCylinder17_group20
+    100012: pasted__pCylinder17_group21
+    100014: pCylinder17
+    400000: group16_pasted__group8_pasted__pasted__pCube81_group22
+    400002: group22_pasted__pCube79
+    400004: group22_pCube80
+    400006: //RootNode
+    400008: pasted__pCylinder17_group19
+    400010: pasted__pCylinder17_group20
+    400012: pasted__pCylinder17_group21
+    400014: pCylinder17
+    2100000: group16_pasted__group8_pasted__pasted__pCube81_group22Mat
+    2100002: group22_pasted__pCube79Mat
+    2100004: group22_pCube80Mat
+    2100006: pasted__pCylinder17_group19Mat
+    2100008: pasted__pCylinder17_group20Mat
+    2100010: pasted__pCylinder17_group21Mat
+    2100012: pCylinder17Mat
+    2300000: group16_pasted__group8_pasted__pasted__pCube81_group22
+    2300002: group22_pasted__pCube79
+    2300004: group22_pCube80
+    2300006: pasted__pCylinder17_group19
+    2300008: pasted__pCylinder17_group20
+    2300010: pasted__pCylinder17_group21
+    2300012: pCylinder17
+    3300000: group16_pasted__group8_pasted__pasted__pCube81_group22
+    3300002: group22_pasted__pCube79
+    3300004: group22_pCube80
+    3300006: pasted__pCylinder17_group19
+    3300008: pasted__pCylinder17_group20
+    3300010: pasted__pCylinder17_group21
+    3300012: pCylinder17
+    4300000: group16_pasted__group8_pasted__pasted__pCube81_group22
+    4300002: group22_pasted__pCube79
+    4300004: group22_pCube80
+    4300006: pasted__pCylinder17_group19
+    4300008: pasted__pCylinder17_group20
+    4300010: pasted__pCylinder17_group21
+    4300012: pCylinder17
+    2186277476908879412: ImportLogs
+>>>>>>> Room:Assets/Moris_Room_Models/IVRC Door.obj.meta
   externalObjects: {}
   materials:
     importMaterials: 1
