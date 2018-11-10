@@ -21,7 +21,7 @@ public class second : MonoBehaviour {
 
     void Update()
     {
-        if(i >= 60 && flag)
+        if(i >= 150 && flag)
         { 
             flag = false; 
             if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)

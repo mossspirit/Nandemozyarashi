@@ -12,7 +12,7 @@ public class idou : MonoBehaviour {
     [System.NonSerialized]
     public bool a_flag = true;
     [SerializeField]
-    GameObject obj,camera_pos; 
+    GameObject obj,camera_pos,con_right; 
     nekojarasi nekojarashi;
     float x, z, neko_x, neko_z, direction_vector_x, direction_vector_z,time;
     Vector3 neko_posi;
@@ -30,19 +30,22 @@ public class idou : MonoBehaviour {
     void Start ()
     {
         nekojarashi = obj.GetComponent<nekojarasi>();
-        neko_posi = camera_pos.transform.position;
         animator = GetComponent<Animator>();
         serial = GameObject.Find("SerialMain").GetComponent<SerialMain>();
         se_con = camera_pos.GetComponent<SE_controller>();
+        Debug.Log(con_right);
 	}
 
 
     void FixedUpdate()
     {
         x = transform.position.x; //無機物のx       
-        z = transform.position.z; //無機物のz       
+        z = transform.position.z; //無機物のz
+        neko_posi = con_right.transform.position;       
         neko_x = neko_posi.x;     //猫じゃらしのx       
-        neko_z = neko_posi.z;     //猫じゃらしのz       
+        neko_z = neko_posi.z;     //猫じゃらしのz
+        //Debug.Log(neko_x);
+        //Debug.Log(neko_z);
         direction_vector_x = x - neko_x; // 正の数…第２、３象限　負の数…第１、４象限        
         direction_vector_z = z - neko_z; // 正の数…第３、４象限　負の数…第１、２象限
 
@@ -56,12 +59,12 @@ public class idou : MonoBehaviour {
     private IEnumerator Moving(float dx,float dz)
     {
         flag = nekojarashi.idou_flag;
+        //Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
 
         if (Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) >= hanni)
         {
             if (flag)
             {
-                //Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
                 transform.position += transform.forward * speed;
                 animator.SetBool(anim_name[0],true);
             }

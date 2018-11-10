@@ -15,8 +15,8 @@ public class lookat : MonoBehaviour {
         z = transform.position.z; //無機物のz
         neko_x = neko_posi.position.x;     //猫じゃらしのx
         neko_z = neko_posi.position.z;     //猫じゃらしのz
-        direction_vector_x = neko_x - x; // 正の数…第２、３象限　負の数…第１、４象限
-        direction_vector_z = neko_z - z; // 正の数…第３、４象限　負の数…第１、２象限
+        direction_vector_x = x - neko_x; // 正の数…第２、３象限　負の数…第１、４象限
+        direction_vector_z = z - neko_z; // 正の数…第３、４象限　負の数…第１、２象限
 
         if (direction_vector_x > 0)
         {
@@ -36,10 +36,12 @@ public class lookat : MonoBehaviour {
             Debug.Log("?");
 
         float yziku = gameObject.transform.localEulerAngles.y; //?
-        float rad = Mathf.Atan2(direction_vector_x, direction_vector_z);
+        float rad = Mathf.Atan2(direction_vector_z, direction_vector_x);
+        Debug.Log(rad);
         float angle = rad * 180 / Mathf.PI;
-        yziku += angle;
-        muki_rotate.Set(0f, yziku, 0f);
+        var y_rotation = yziku - angle;
+        //Debug.Log(y_rotation);
+        muki_rotate.Set(0f, y_rotation, 0f);
         transform.eulerAngles = muki_rotate;
     }
 }
