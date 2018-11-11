@@ -12,7 +12,7 @@ public class idou : MonoBehaviour {
     [System.NonSerialized]
     public bool a_flag = true;
     [SerializeField]
-    GameObject obj,camera_pos; 
+    GameObject obj,camera_pos,con_right; 
     nekojarasi nekojarashi;
     float x, z, neko_x, neko_z, direction_vector_x, direction_vector_z,time;
     Vector3 neko_posi;
@@ -23,14 +23,12 @@ public class idou : MonoBehaviour {
     AudioClip[] SEs = new AudioClip[5];
     [SerializeField,Tooltip("自分以外の動物（無機物）")]
     GameObject[] gameObjects;
-    [System.NonSerialized]
-    public bool SE_flag ;
+    private bool SE_flag ;
     SE_controller se_con;
 
     void Start ()
     {
         nekojarashi = obj.GetComponent<nekojarasi>();
-        neko_posi = camera_pos.transform.position;
         animator = GetComponent<Animator>();
         serial = GameObject.Find("SerialMain").GetComponent<SerialMain>();
         se_con = camera_pos.GetComponent<SE_controller>();
@@ -39,6 +37,8 @@ public class idou : MonoBehaviour {
 
     void FixedUpdate()
     {
+        neko_posi = con_right.transform.position;
+
         x = transform.position.x; //無機物のx       
         z = transform.position.z; //無機物のz       
         neko_x = neko_posi.x;     //猫じゃらしのx       
@@ -56,12 +56,12 @@ public class idou : MonoBehaviour {
     private IEnumerator Moving(float dx,float dz)
     {
         flag = nekojarashi.idou_flag;
+        //Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
 
         if (Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) >= hanni)
         {
             if (flag)
             {
-                //Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
                 transform.position += transform.forward * speed;
                 animator.SetBool(anim_name[0],true);
             }
@@ -72,12 +72,15 @@ public class idou : MonoBehaviour {
         }
         else if (Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) < hanni)
         {
-            if(once_flag)
+            animator.SetBool(anim_name[0], false);
+            SE_flag = se_con.SE_flag;
+            if (once_flag)
             {
-                animator.SetBool(anim_name[0], false);
                 SE_flag = true;
                 once_flag = false;
             }
+
+            Debug.Log(SE_flag);
             if(SE_flag)
             {
                 if (flag)
