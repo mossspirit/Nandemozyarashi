@@ -9,7 +9,7 @@ public class ObjectSelect : MonoBehaviour {
 	[SerializeField]
 	GameObject[] gameObjects = new GameObject[5];
 	GameObject old_object;
-	bool once_flag = true;
+    bool once_flag = true, onceflag = true;
 
 	void Start () {
 		
@@ -18,7 +18,7 @@ public class ObjectSelect : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		var counter = 0;
+		/*var counter = 0;
 		for(int i = 0;i < 5;i++){
 			if(gameObjects[i].GetComponent<Moving_idou>().select_flag)
 			counter++;
@@ -27,25 +27,34 @@ public class ObjectSelect : MonoBehaviour {
 			for(int i = 0;i < 5;i++){
 				gameObjects[i].GetComponent<Moving_idou>().select_flag = false;
 			}
-		}
+		}*/
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		obj_name = other.name;
+        once_flag = true;
 	}
     private void OnTriggerStay(Collider other)
     {
         if(other.name == obj_name){
 			time += Time.deltaTime;
-			if(time >= 1 && once_flag){
-				other.GetComponent<Moving_idou>().select_flag = true;
-				if(old_object){
-					old_object.AddComponent<comeback>();
-				}
-				old_object = other.gameObject;
-				once_flag = false;
-			}
+            if (once_flag)
+            {
+                if (time >= 1)
+                {
+                    Debug.Log(obj_name);
+                    other.GetComponent<Moving_idou>().select_flag = true;
+                    if(old_object != other.gameObject && !onceflag)
+                    {
+                        old_object.GetComponent<Moving_idou>().select_flag = false;
+                        old_object.AddComponent<comeback>();
+                    }
+                    old_object = other.gameObject;
+                    onceflag = false;
+                    once_flag = false;
+                }
+            }
 		}
     }
 	private void OnTriggerExit(Collider other){

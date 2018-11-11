@@ -37,7 +37,7 @@ public class nekojarasi : MonoBehaviour
             c = 0;
             flag = 0;
         }
-        else if (c % 2 == 0)
+        else if (c % 1 == 0)
         {
             old_data = transform.eulerAngles.y;
             flag++;

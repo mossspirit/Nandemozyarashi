@@ -79,8 +79,6 @@ public class Moving_idou : MonoBehaviour {
                 SE_flag = true;
                 once_flag = false;
             }
-
-            Debug.Log(SE_flag);
             if(SE_flag)
             {
                 if (flag)

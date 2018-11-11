@@ -24,7 +24,7 @@ public class second : MonoBehaviour {
         if(i >= 60 && flag)
         { 
             flag = false; 
-            if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)
+         /*   if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)
             {
                 GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag++;
                 if(SceneManager.GetActiveScene().name == scene_name[0])
@@ -38,7 +38,7 @@ public class second : MonoBehaviour {
             }
             {
                 
-            }
+            }*/
         }
     }
 

@@ -9,7 +9,6 @@ public class comeback : MonoBehaviour {
 	const int speed = 100;
 	int i,flag = 0;
 	Moving_idou Idou;
-	[SerializeField]
 	GameObject nekozyarashi;
 	bool mov_flag;
 
@@ -18,7 +17,8 @@ public class comeback : MonoBehaviour {
 		mov_flag = false;
 		vector = transform.position;
 		hanni = GetComponent<Moving_idou>().hanni;
-		neko_posi = nekozyarashi.transform.position;
+		neko_posi = GameObject.Find("nekojarashi").transform.position;
+        Debug.Log("comeback");
 	}
 	
 	void Update () {
@@ -58,7 +58,7 @@ public class comeback : MonoBehaviour {
         float angle = rad * 180 / Mathf.PI;
 		float angle_percentage = angle / (float)speed;
 		i = speed;
-		while(i == 0){
+		while(i >= 0){
 			i--;
 			yziku += angle_percentage;
             This_rotation.Set(0f, yziku, 0f);
