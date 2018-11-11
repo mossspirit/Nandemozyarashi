@@ -14,7 +14,7 @@ public class comeback : MonoBehaviour {
 	bool mov_flag;
 
 	void Start () {
-		mov_flag =GetComponent<Moving_idou>().enabled;
+		mov_flag =GetComponent<Moving_idou>().select_flag = false;
 		mov_flag = false;
 		vector = transform.position;
 		hanni = GetComponent<Moving_idou>().hanni;

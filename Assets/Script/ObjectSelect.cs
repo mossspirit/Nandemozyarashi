@@ -38,12 +38,13 @@ public class ObjectSelect : MonoBehaviour {
     {
         if(other.name == obj_name){
 			time += Time.deltaTime;
-			if(time >= 1){
+			if(time >= 1 && once_flag){
 				other.GetComponent<Moving_idou>().select_flag = true;
-				old_object = other.gameObject;
 				if(old_object){
-					
+					old_object.AddComponent<comeback>();
 				}
+				old_object = other.gameObject;
+				once_flag = false;
 			}
 		}
     }
