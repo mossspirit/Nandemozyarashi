@@ -30,7 +30,7 @@ public class nekojarasi : MonoBehaviour
     }
     void FixedUpdate()
     {
-        animation_flag = doubutsu.GetComponent<idou>().a_flag;
+        animation_flag = doubutsu.GetComponent<Moving_idou>().a_flag;
         c++;
         if (c > 4)
         {
