@@ -21,7 +21,7 @@ public class comeback : MonoBehaviour {
         Debug.Log("comeback");
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if(flag == 0) //回転（後ろを向く）
 		{
 			x = transform.position.x; //無機物のx
