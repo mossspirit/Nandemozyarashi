@@ -34,6 +34,7 @@ public class Moving_idou : MonoBehaviour {
     int i;
     public bool comeback_flag = false,shoki_neko_flag = true;
     float shoki_y_ziku;
+    Particle isparticle;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class Moving_idou : MonoBehaviour {
         direction_vector_x = neko_posi.x - transform.position.x;
         direction_vector_z = neko_posi.z - transform.position.z;
         StartCoroutine(Rot(direction_vector_x, direction_vector_z));
+        isparticle = GetComponent<Particle>();
     }
 
 
@@ -69,10 +71,11 @@ public class Moving_idou : MonoBehaviour {
         {
 
             //Debug.Log(gameObject.name);
-            Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
+            //Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
             Rotation(direction_vector_x, direction_vector_z); //回転
             if (shoki_neko_flag)
             {
+                isparticle.Bikkuri();
                 shoki_y_ziku = gameObject.transform.localEulerAngles.y;
                 shoki_neko_flag = false;
             }
@@ -92,6 +95,7 @@ public class Moving_idou : MonoBehaviour {
                     if (flag)
                     {
                         var i = Random.Range(1, 4);
+                        isparticle.Heart();
                         animator.SetTrigger(anim_name[i]);
                         Serial_Shake();
                     }
@@ -126,6 +130,7 @@ public class Moving_idou : MonoBehaviour {
         }
     }
 
+    //移動（過去）
     private IEnumerator Moving(float dx,float dz)
     {
         flag = nekojarashi.idou_flag;
@@ -180,7 +185,7 @@ public class Moving_idou : MonoBehaviour {
         while (i > 0)
         {
             i--;
-            Debug.Log(yziku);
+
             //yziku += angle_percentage;
             yziku += angle;
             muki_rotate.Set(0f, yziku, 0f);
@@ -221,6 +226,7 @@ public class Moving_idou : MonoBehaviour {
 
     private IEnumerator Come_back(float x,float z)
     {
+        isparticle.Syun();
         comeback_flag = false;
         StartCoroutine(Rotation_comeback(x,z));
         yield return new WaitForSeconds(1.3f);
