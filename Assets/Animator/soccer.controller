@@ -293,7 +293,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400010, guid: 45a0b9ebc22954f46a8db370f834e29c, type: 3}
+  m_Motion: {fileID: 7400010, guid: 28b873fe47e1d614883355878b65b29f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -322,7 +322,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400004, guid: 45a0b9ebc22954f46a8db370f834e29c, type: 3}
+  m_Motion: {fileID: 7400004, guid: 28b873fe47e1d614883355878b65b29f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -349,7 +349,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400008, guid: 45a0b9ebc22954f46a8db370f834e29c, type: 3}
+  m_Motion: {fileID: 7400008, guid: 28b873fe47e1d614883355878b65b29f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -361,7 +361,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: jump
+  m_Name: idou
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -376,7 +376,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 45a0b9ebc22954f46a8db370f834e29c, type: 3}
+  m_Motion: {fileID: 7400000, guid: 28b873fe47e1d614883355878b65b29f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -403,7 +403,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400006, guid: 45a0b9ebc22954f46a8db370f834e29c, type: 3}
+  m_Motion: {fileID: 7400006, guid: 28b873fe47e1d614883355878b65b29f, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
