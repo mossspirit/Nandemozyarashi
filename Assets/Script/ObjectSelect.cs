@@ -47,7 +47,9 @@ public class ObjectSelect : MonoBehaviour {
                     other.GetComponent<Moving_idou>().select_flag = true;
                     if(old_object != other.gameObject && !onceflag)
                     {
+                        Debug.Log("a");
                         old_object.GetComponent<Moving_idou>().select_flag = false;
+                        old_object.GetComponent<Moving_idou>().comeback_flag = true;
                     }
                     old_object = other.gameObject;
                     onceflag = false;

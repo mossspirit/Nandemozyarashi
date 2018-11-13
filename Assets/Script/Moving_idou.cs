@@ -32,7 +32,7 @@ public class Moving_idou : MonoBehaviour {
     Vector3 _RotAxis = Vector3.up,SYOKI;
     float yziku;
     int i;
-    bool comeback_flag = false;
+    public bool comeback_flag = false;
 
     private void Awake()
     {
@@ -181,7 +181,8 @@ public class Moving_idou : MonoBehaviour {
     {
         for (int i = 0; i < 100; i++)
         {
-            transform.Translate(x / 100, transform.position.y, z / 100);
+
+            transform.Translate(x / 100,0f, z / 100);
             yield return new WaitForSeconds(0.01f);
         }
     }
@@ -193,8 +194,8 @@ public class Moving_idou : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         StartCoroutine(Return(x, z));
         yield return new WaitForSeconds(1f);
-        StartCoroutine(Rotation_comeback());
-        yield return new WaitForSeconds(1f);
+        //StartCoroutine(Rotation_comeback());
+        //yield return new WaitForSeconds(1f);
     }
 
     void Serial_Shake()
