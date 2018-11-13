@@ -32,7 +32,6 @@ public class StateController : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("a");
         if (stateInfo.IsName("zyare1") || stateInfo.IsName("zyare2") || stateInfo.IsName("zyare3") || stateInfo.IsName("jump"))
         {
             _audio.SE_flag_true();

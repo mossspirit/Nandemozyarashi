@@ -12,7 +12,7 @@ public class Moving_idou : MonoBehaviour {
     [System.NonSerialized]
     public bool a_flag = true;
     [SerializeField]
-    GameObject obj,camera_pos,con_right;
+    GameObject neko,camera_pos,con_right;
     
     nekojarasi nekojarashi;
     float  direction_vector_x, direction_vector_z,time;
@@ -32,19 +32,25 @@ public class Moving_idou : MonoBehaviour {
     Vector3 _RotAxis = Vector3.up,SYOKI;
     float yziku;
     int i;
-    public bool comeback_flag = false;
+    public bool comeback_flag = false,shoki_neko_flag = true;
+    float shoki_y_ziku;
 
     private void Awake()
     {
         SYOKI = transform.position;
+        
     }
     void Start ()
     {
-        nekojarashi = obj.GetComponent<nekojarasi>();
+        nekojarashi = neko.GetComponent<nekojarasi>();
         animator = GetComponent<Animator>();
         serial = GameObject.Find("SerialMain").GetComponent<SerialMain>();
         se_con = camera_pos.GetComponent<SE_controller>();
-	}
+        neko_posi = con_right.transform.position;
+        direction_vector_x = neko_posi.x - transform.position.x;
+        direction_vector_z = neko_posi.z - transform.position.z;
+        StartCoroutine(Rot(direction_vector_x, direction_vector_z));
+    }
 
 
     void FixedUpdate()
@@ -60,16 +66,22 @@ public class Moving_idou : MonoBehaviour {
         flag = nekojarashi.idou_flag;//猫じゃらしが動いているかどうか
         //選ばれているか
         if (select_flag)
-        {  
-            
-           // Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
+        {
+
+            //Debug.Log(gameObject.name);
+            Debug.Log(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) + " " + direction_vector_x + " " + direction_vector_z);
             Rotation(direction_vector_x, direction_vector_z); //回転
+            if (shoki_neko_flag)
+            {
+                shoki_y_ziku = gameObject.transform.localEulerAngles.y;
+                shoki_neko_flag = false;
+            }
             if (Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) < hanni)
             {
                 animator.SetBool(anim_name[0], false);
                 SE_flag = se_con.SE_flag;
-                Debug.Log(gameObject.name + SE_flag);
-                Debug.Log(gameObject.name + once_flag);
+                //Debug.Log(gameObject.name + SE_flag);
+                //Debug.Log(gameObject.name + once_flag);
                 if (once_flag)
                 {
                     SE_flag = true;
@@ -77,7 +89,6 @@ public class Moving_idou : MonoBehaviour {
                 }
                 if (SE_flag)
                 {
-                    Debug.Log(gameObject.name + flag);
                     if (flag)
                     {
                         var i = Random.Range(1, 4);
@@ -103,15 +114,15 @@ public class Moving_idou : MonoBehaviour {
         //選ばれていない
         else
         {
-            if(Mathf.Abs(Mathf.Sqrt(Mathf.Pow((direction_vector_x), 2) + Mathf.Pow((direction_vector_z), 2))) < hanni)
-            {
+   
                 if (comeback_flag)
                 {
+                    Debug.Log("iwana00");
                     var x = SYOKI.x - transform.position.x;
                     var z = SYOKI.z - transform.position.z;
                     StartCoroutine(Come_back(x,z));
                 }
-            }
+            
         }
     }
 
@@ -160,29 +171,50 @@ public class Moving_idou : MonoBehaviour {
         transform.eulerAngles = muki_rotate;
     }
 
-    private IEnumerator Rotation_comeback()
+    IEnumerator Rot(float x,float z)
     {
         float yziku = gameObject.transform.localEulerAngles.y; //?
-        //float rad = Mathf.Atan2(dx, dz);
-        //float angle = rad * 180 / Mathf.PI;
-        i = hundred;
-        //float angle_percentage = angle / hundred;
+        float rad = Mathf.Atan2(x, z);
+        float angle = rad * 180 / Mathf.PI / 100;
+        i = 100;
         while (i > 0)
         {
             i--;
-            Debug.Log(i);
-            yziku += 1.8f;
+            Debug.Log(yziku);
+            //yziku += angle_percentage;
+            yziku += angle;
             muki_rotate.Set(0f, yziku, 0f);
+            transform.eulerAngles = muki_rotate;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    private IEnumerator Rotation_comeback(float dx,float dz)
+    {
+        float yziku = gameObject.transform.localEulerAngles.y; //?
+        float rad = Mathf.Atan2(dx, dz);
+        float angle = rad * 180 / Mathf.PI;
+        i = hundred;
+        double fdafa = 0;
+        float angle_percentage = angle / hundred;
+        while (i > 0)
+        {
+            i--;
+            Debug.Log(yziku);
+            //yziku += angle_percentage;
+            shoki_y_ziku += 1.8f;
+            muki_rotate.Set(0f, shoki_y_ziku, 0f);
             transform.eulerAngles = muki_rotate;
             yield return new WaitForSeconds(0.01f);
         }
     }
     private IEnumerator Return(float x,float z)
     {
+
         for (int i = 0; i < 100; i++)
         {
-
-            transform.Translate(x / 100,0f, z / 100);
+            var pere = Mathf.Abs(Mathf.Sqrt(Mathf.Pow((x), 2) + Mathf.Pow((z), 2))) / 100;
+            transform.position += transform.forward * pere;
             yield return new WaitForSeconds(0.01f);
         }
     }
@@ -190,12 +222,13 @@ public class Moving_idou : MonoBehaviour {
     private IEnumerator Come_back(float x,float z)
     {
         comeback_flag = false;
-        StartCoroutine(Rotation_comeback());
-        yield return new WaitForSeconds(1f);
+        StartCoroutine(Rotation_comeback(x,z));
+        yield return new WaitForSeconds(1.3f);
         StartCoroutine(Return(x, z));
+        yield return new WaitForSeconds(1.3f);
+        StartCoroutine(Rotation_comeback(x,z));
         yield return new WaitForSeconds(1f);
-        //StartCoroutine(Rotation_comeback());
-        //yield return new WaitForSeconds(1f);
+        shoki_neko_flag = true;
     }
 
     void Serial_Shake()

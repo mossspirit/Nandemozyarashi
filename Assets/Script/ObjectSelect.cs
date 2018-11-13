@@ -9,7 +9,7 @@ public class ObjectSelect : MonoBehaviour {
 	[SerializeField]
 	GameObject[] gameObjects = new GameObject[5];
 	GameObject old_object;
-    bool once_flag = true, onceflag = true;
+    bool once_flag = true, null_kaihi_flag = true;
 
 	void Start () {
 		
@@ -30,35 +30,37 @@ public class ObjectSelect : MonoBehaviour {
 		}*/
 	}
 
-	private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
 	{
 		obj_name = other.name;
         once_flag = true;
-	}
+        Debug.Log(other.name);
+	}*/
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.name == obj_name){
-			time += Time.deltaTime;
-            if (once_flag)
+        time += Time.deltaTime;
+        if (once_flag)
+        {
+            if (time >= 3)
             {
-                if (time >= 3)
+                once_flag = false;
+                //Debug.Log(obj_name);
+                other.GetComponent<Moving_idou>().select_flag = true;
+                if (old_object != other.gameObject && !null_kaihi_flag)
                 {
-                    Debug.Log(obj_name);
-                    other.GetComponent<Moving_idou>().select_flag = true;
-                    if(old_object != other.gameObject && !onceflag)
-                    {
-                        Debug.Log("a");
-                        old_object.GetComponent<Moving_idou>().select_flag = false;
-                        old_object.GetComponent<Moving_idou>().comeback_flag = true;
-                    }
-                    old_object = other.gameObject;
-                    onceflag = false;
+                    Debug.Log("a");
+                    old_object.GetComponent<Moving_idou>().select_flag = false;
+                    old_object.GetComponent<Moving_idou>().comeback_flag = true;
                 }
+                old_object = other.gameObject;
+                null_kaihi_flag = false;
             }
-		}
+
+        }
     }
 	private void OnTriggerExit(Collider other){
 		time = 0;
-        once_flag = false;
+        once_flag = true;
     }
 }

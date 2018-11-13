@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class second : MonoBehaviour {
     
     GameObject hour, minute;            //短針、長針
-    [SerializeField]
-    float a;                    //角速度
+    [SerializeField,Tooltip("制限時間（秒）")]
+    float Time_limit;
+    float a = 6;                    //角速度
     int i = 1;                          //時間
     bool flag = true;
     string[] scene_name = {"chair","plant","end"};
@@ -21,8 +22,9 @@ public class second : MonoBehaviour {
 
     void Update()
     {
-        if(i >= 60 && flag)
-        { 
+        if(i >= Time_limit && flag)
+        {
+            SceneManager.LoadScene("end");
             flag = false; 
          /*   if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)
             {
