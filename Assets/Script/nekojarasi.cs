@@ -32,12 +32,12 @@ public class nekojarasi : MonoBehaviour
     {
         animation_flag = doubutsu.GetComponent<Moving_idou>().a_flag;
         c++;
-        if (c > 4)
+        if (c > 2)
         {
             c = 0;
             flag = 0;
         }
-        else if (c % 2 == 0)
+        else if (c % 1 == 0)
         {
             old_data = transform.eulerAngles.y;
             flag++;

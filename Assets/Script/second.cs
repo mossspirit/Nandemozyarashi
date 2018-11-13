@@ -11,9 +11,10 @@ public class second : MonoBehaviour {
     float a = 6;                    //角速度
     int i = 1;                          //時間
     bool flag = true;
-    string[] scene_name = {"chair","plant","end"};
+    [SerializeField]
+    private CameraFader _cameraFader = null;
 
-	void Start () {
+    void Start () {
         a *= -1;
         hour = GameObject.Find("hour");
         minute = GameObject.Find("minute");
@@ -24,7 +25,7 @@ public class second : MonoBehaviour {
     {
         if(i >= Time_limit && flag)
         {
-            SceneManager.LoadScene("end");
+            StartCoroutine(Load_end());
             flag = false; 
          /*   if(GameObject.Find("hensu_kyoyu").GetComponent<hensu>().flag==0)
             {
@@ -52,5 +53,13 @@ public class second : MonoBehaviour {
         yield return new WaitForSeconds(1f); //１秒待つ
         i++;
         StartCoroutine(MagicTime()); //次のコルーチンを再帰
+    }
+
+    IEnumerator Load_end()
+    {
+        var time = 5f;
+        _cameraFader.FadeOut(duration: time);
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("end");
     }
 }
