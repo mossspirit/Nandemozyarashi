@@ -10,11 +10,15 @@ public class second : MonoBehaviour {
     float Time_limit;
     float a = 6;                    //角速度
     int i = 1;                          //時間
-    bool flag = true;
+    bool flag = true,audioFlag = true;
     [SerializeField]
     private CameraFader _cameraFader = null;
+    AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] audioClips = new AudioClip[2];
 
     void Start () {
+        audioSource = GetComponent<AudioSource>();
         a *= -1;
         hour = GameObject.Find("hour");
         minute = GameObject.Find("minute");
@@ -23,6 +27,11 @@ public class second : MonoBehaviour {
 
     void Update()
     {
+        if(i >= Time_limit - 10f && audioFlag){
+            audioFlag = false;
+            audioSource.clip = audioClips[0];
+            audioSource.Play();
+        }
         if(i >= Time_limit && flag)
         {
             StartCoroutine(Load_end());

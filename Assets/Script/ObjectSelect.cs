@@ -56,7 +56,8 @@ public class ObjectSelect : MonoBehaviour {
         time += Time.deltaTime;
         if (once_flag)
         {
-            foreach (Transform child in other.gameObject.transform)
+			if(old_object != other.gameObject){
+			foreach (Transform child in other.gameObject.transform)
             {
                 if(child.name == "HPUI")
                 {
@@ -70,8 +71,9 @@ public class ObjectSelect : MonoBehaviour {
                 {
                     UIobj = child.GetComponent<Image>();
                 }
-            }
+			}
             UIobj.fillAmount = 1 - time / 3;
+			}
             if (time >= 3)
             {
                 UIobj.fillAmount = 1f;
