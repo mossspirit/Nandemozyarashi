@@ -17,9 +17,9 @@ public class SE_controller : MonoBehaviour {
 	
 	public void Walk_SE(){
 		audioSource.clip = audioClips[0];
-		audioSource.Play();
+		//audioSource.Play();
         SE_flag = false;
-        Debug.Log("sa");
+        //Debug.Log("sa");
 	}
 
 	public void Wait_SE(){

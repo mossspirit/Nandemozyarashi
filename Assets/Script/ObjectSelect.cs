@@ -41,23 +41,22 @@ public class ObjectSelect : MonoBehaviour {
 			time += Time.deltaTime;
             if (once_flag)
             {
-                if (time >= 1)
+                if (time >= 3)
                 {
                     Debug.Log(obj_name);
                     other.GetComponent<Moving_idou>().select_flag = true;
                     if(old_object != other.gameObject && !onceflag)
                     {
                         old_object.GetComponent<Moving_idou>().select_flag = false;
-                        old_object.AddComponent<comeback>();
                     }
                     old_object = other.gameObject;
                     onceflag = false;
-                    once_flag = false;
                 }
             }
 		}
     }
 	private void OnTriggerExit(Collider other){
 		time = 0;
-	}
+        once_flag = false;
+    }
 }

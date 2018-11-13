@@ -8,7 +8,13 @@ public class lookat : MonoBehaviour {
     public Transform neko_posi;
     private Vector3 muki_rotate;
     Vector3 _RotAxis = Vector3.up;
+    float yziku; 
 
+    private void Start()
+    {
+        yziku = gameObject.transform.localEulerAngles.y; //?
+
+    }
     void FixedUpdate ()
     {
         x = transform.position.x; //無機物のx
@@ -35,10 +41,8 @@ public class lookat : MonoBehaviour {
         else
             Debug.Log("?");
             */
-        float yziku = gameObject.transform.localEulerAngles.y; //?
         float rad = Mathf.Atan2(direction_vector_x, direction_vector_z);
         float angle = rad * 180 / Mathf.PI;
-        yziku += angle;
         muki_rotate.Set(0f, angle, 0f);
         transform.eulerAngles = muki_rotate;
     }
