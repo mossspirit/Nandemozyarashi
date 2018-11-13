@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO.Ports;
 using UnityEngine;
 using UniRx;
@@ -40,5 +40,4 @@ public class SerialMain : MonoBehaviour
         this.isLoop = false;
         this.serial.Close();
     }
-
 }
