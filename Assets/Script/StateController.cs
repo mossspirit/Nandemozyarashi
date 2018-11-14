@@ -9,14 +9,14 @@ public class StateController : StateMachineBehaviour
     {
         _audio = GameObject.Find("[CameraRig]").GetComponent<SE_controller>();
 
-        if (stateInfo.IsName("wait"))
+        /*if (stateInfo.IsName("wait"))
         {
             _audio.Wait_SE();
         }
         if (stateInfo.IsName("walk"))
         {
             _audio.Walk_SE();
-        }
+        }*/
         if (stateInfo.IsName("zyare1"))
         {
             _audio.Zyare1_SE();

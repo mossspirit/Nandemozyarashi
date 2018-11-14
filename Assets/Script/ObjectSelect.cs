@@ -8,7 +8,6 @@ public class ObjectSelect : MonoBehaviour {
 	string obj_name;
 	float time = 0;
 	[SerializeField]
-	GameObject[] gameObjects = new GameObject[5];
 	GameObject old_object;
     bool once_flag = true, null_kaihi_flag = true;
     [SerializeField]

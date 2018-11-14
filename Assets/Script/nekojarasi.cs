@@ -9,7 +9,10 @@ public class nekojarasi : MonoBehaviour
     /// 猫じゃらしの対象物がこっちに向かってくる（Hanteiメソッドで定義、実装）    
     /// </summary>   
 
-    private float new_data = 0, old_data = 0, c = 0;
+    [System.NonSerialized]
+    public float new_data = 0, old_data = 0;
+
+    float c = 0;
     private int i;
     private bool rotation_flag,animation_flag;
     [SerializeField]
@@ -30,7 +33,6 @@ public class nekojarasi : MonoBehaviour
     }
     void FixedUpdate()
     {
-        animation_flag = doubutsu.GetComponent<Moving_idou>().a_flag;
         c++;
         if (c > 2)
         {
@@ -41,22 +43,12 @@ public class nekojarasi : MonoBehaviour
         {
             old_data = transform.eulerAngles.y;
             flag++;
-
-            if (Hantei(new_data, old_data) && flag >= 1 || Input.GetKey(KeyCode.Z))
-            {
-                idou_flag = true;
-
-            }
-            else
-            {
-                idou_flag = false;
-            }
         }
         new_data = old_data;
     }
 
 
-    public bool Hantei(float new_data, float old_data)
+    public float Hantei(float new_data, float old_data)
     {
         float result;
         float abs_new_data, abs_old_data;
@@ -69,22 +61,24 @@ public class nekojarasi : MonoBehaviour
             result = abs_new_data + abs_old_data;
             result *= 100;
             result = System.Math.Abs(result);
-            //Debug.Log(result);    
-            if (result > sa_hensu) return true;
-            else return false;
+
+            if (result > 1000 && result < 10000) Debug.Log("a");
+            else if (result > 10000) Debug.Log("b");
+
+           return result;
         }
-        else if (abs_new_data < abs_old_data)
+        else if (abs_new_data <= abs_old_data)
         {
             if (abs_new_data < 0) abs_new_data *= -1;
             if (abs_old_data > 0) abs_old_data *= -1;
             result = abs_new_data + abs_old_data;
             result *= 100;
             result = System.Math.Abs(result);
-            //Debug.Log(result);
 
-            if (result > sa_hensu) return true;
-            else return false;
+            if (result > 1000 && result < 10000) Debug.Log("a");
+            else if (result > 10000) Debug.Log("b");
+            return result;
         }
-        else return false; //値が同じ　＝　動かしていない  
+        return 0;
     }
 }
