@@ -36,7 +36,7 @@ public class Particle : MonoBehaviour
     public void Heart()
     {
         particle[0].Play();
-        Debug.Log("a");
+        //Debug.Log("a");
         //1500ミリ秒後にLogを出す
         Observable.Timer(TimeSpan.FromMilliseconds(1000))
             .Subscribe(_ => particle[0].Stop());
@@ -44,7 +44,7 @@ public class Particle : MonoBehaviour
     public void Bikkuri()
     {
         particle[1].Play();
-        Debug.Log("b");
+        //Debug.Log("b");
         //1500ミリ秒後にLogを出す
         Observable.Timer(TimeSpan.FromMilliseconds(1000))
             .Subscribe(_ => particle[1].Stop());
@@ -52,7 +52,7 @@ public class Particle : MonoBehaviour
     public void Syun()
     {
         particle[2].Play();
-        Debug.Log("c");
+        //Debug.Log("c");
         //1500ミリ秒後にLogを出す
         Observable.Timer(TimeSpan.FromMilliseconds(1000))
             .Subscribe(_ => particle[2].Stop());

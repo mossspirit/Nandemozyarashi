@@ -78,12 +78,12 @@ public class new_idou : MonoBehaviour {
         }
         animator.SetTrigger(anim_name[j]);
 
-        for(int i = 0;i < 150; i++)
+        for(int i = 0;i < 200; i++)
         {
             new_data = _nekojarashi.new_data;
             old_data = _nekojarashi.old_data;
             sum +=_nekojarashi.Hantei(new_data, old_data);
-            yield return new WaitForSeconds(0.015f);
+            yield return new WaitForSeconds(0.03f);
         }
 
         if(sum < 200)
