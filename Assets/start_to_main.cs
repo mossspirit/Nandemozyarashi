@@ -12,7 +12,7 @@ public class start_to_main : MonoBehaviour {
 
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.S))
         {
             StartCoroutine(Load_main());
         }
