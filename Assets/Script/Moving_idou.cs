@@ -35,9 +35,6 @@ public class Moving_idou : MonoBehaviour {
     public bool comeback_flag = false,shoki_neko_flag = true;
     float shoki_y_ziku;
     Particle isparticle;
-    [SerializeField]
-    float move_speed = 2f;
-    
 
     private void Awake()
     {
@@ -108,7 +105,7 @@ public class Moving_idou : MonoBehaviour {
             {
                 if (flag)
                 {
-                    transform.position += transform.forward * Time.deltaTime * move_speed;
+                    transform.position += transform.forward * Time.deltaTime;
                     animator.SetBool(anim_name[0], true);
                 }
                 else

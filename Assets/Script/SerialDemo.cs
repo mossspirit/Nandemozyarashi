@@ -7,13 +7,6 @@ public class SerialDemo : MonoBehaviour {
     [SerializeField]
     SerialMain serial;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            OnPushed();
-        }
-    }
     public void OnPushed()
     {
         byte[] data = new byte[1];

@@ -72,9 +72,9 @@ public class ObjectSelect : MonoBehaviour {
                     UIobj = child.GetComponent<Image>();
                 }
 			}
-            UIobj.fillAmount = 1 - time / 1.5f;
+            UIobj.fillAmount = 1 - time / 3;
 			}
-            if (time >= 1.5)
+            if (time >= 3)
             {
                 UIobj.fillAmount = 1f;
                 child_obj.SetActive(false);
@@ -96,6 +96,5 @@ public class ObjectSelect : MonoBehaviour {
 	private void OnTriggerExit(Collider other){
 		time = 0;
         once_flag = true;
-        child_obj.SetActive(false);
     }
 }
